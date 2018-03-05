@@ -74,7 +74,9 @@ int blur(){
 
 
     for( int i = 0; i <= rows * cols; i++ ){
+        //Calculate average color
         int* RGB = effect( (int)i / cols, i % cols );
+        //Assign the new average value
         picture.at<Vec3b>( (int)i / cols, i % cols )[0] = RGB[0];
         picture.at<Vec3b>( (int)i / cols, i % cols )[1] = RGB[1];
         picture.at<Vec3b>( (int)i / cols, i % cols )[2] = RGB[2];
@@ -90,13 +92,23 @@ int main( int argc, char** argv )
     
     validations( argc, argv);
 
-
+    //start time
+	int start = clock();
     rows = picture.rows;
     cols = picture.cols;
 
+    //Blur effect
     blur();
+    //stop time
+	int stop = clock();
 
     //namedWindow("blur effect image", WINDOW_NORMAL );
     //imshow("blur effect image", picture);
+
+    //print performance information
+	cout << cols << "x";
+	cout << rows << "\t";
+	cout << kernel << "\t";
+	cout << (stop - start)/double(CLOCKS_PER_SEC)*1000 << " ms" << endl;
     return 0;
 }

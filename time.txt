@@ -1,0 +1,27 @@
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+1280x720	3	750.425 ms
+1280x720	5	1595.82 ms
+1280x720	7	2786.14 ms
+1280x720	9	4553.48 ms
+1280x720	11	6603.69 ms
