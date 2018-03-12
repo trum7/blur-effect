@@ -1,0 +1,41 @@
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+No picture
+1280x720	3	750.425 ms
+1280x720	5	1595.82 ms
+1280x720	7	2786.14 ms
+1280x720	9	4553.48 ms
+1280x720	11	6603.69 ms
+1280x720	13	9109.15 ms
+1280x720	15	11904.2 ms
+1920x1080	3	1651.32 ms
+1920x1080	5	3557.43 ms
+1920x1080	7	6304.78 ms
+1920x1080	9	10321.5 ms
+1920x1080	11	14965.4 ms
+1920x1080	13	20319.5 ms
+1920x1080	15	26716.2 ms
+3840x2160	3	6598.11 ms
+3840x2160	5	14216.2 ms
+3840x2160	7	25279.7 ms
+3840x2160	9	40815.7 ms
+3840x2160	11	59196 ms

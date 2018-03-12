@@ -1,23 +1,30 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <pthread.h>
+#include <mutex>
+
 
 using namespace std;
 using namespace cv;
+std::mutex mtx;
 
 int rows;
 int cols;
 int kernel;
 int radio;
+int hilos;
+int id = 0;
 Mat picture;
 
 int cont = 0;
 
 int validations( int argc, char** argv  ){
 
-    if( argc != 3 ){
+    if( argc != 4 ){
         cout << endl;
         cout << " First parameter:  picture path with the extention ex. picture/ducati4k.jpg" << endl;
         cout << " Second parameter: between 3 and 15" << endl;
+        cout << " Third parameter: between 1 and 16" << endl;
         return -1;
     }
 
@@ -32,6 +39,7 @@ int validations( int argc, char** argv  ){
         cout << "The kernel must be a number between 3 - 15" << endl;
         return -1;
     }
+    hilos = atoi( argv[3] );
     
     radio = int((kernel - 1)/2);
     return 0;
@@ -70,10 +78,14 @@ int* effect( int row, int column){
 
 }
 
-int blur(){
+void *blur( void * z ){
 
+    mtx.lock();
+    int id_hilo = id;
+    id++;
+    mtx.unlock();
 
-    for( int i = 0; i <= rows * cols; i++ ){
+    for( int i = id; i <= rows * cols; i = i+hilos ){
         //Calculate average color
         int* RGB = effect( (int)i / cols, i % cols );
         //Assign the new average value
@@ -82,7 +94,7 @@ int blur(){
         picture.at<Vec3b>( (int)i / cols, i % cols )[2] = RGB[2];
     }
 
-    return 1;
+    
 
 }
 
@@ -97,20 +109,40 @@ int main( int argc, char** argv )
     rows = picture.rows;
     cols = picture.cols;
 
-    //Blur effect
-    blur();
+
+    void * null = NULL;
+
+    pthread_t thread[hilos];
+    for( int i = 0; i < hilos; i++){
+        if( pthread_create( &thread[i], NULL, blur, NULL) != 0 ){
+            cout << "error pthread_create" << endl;
+            return -1;
+        }
+    }
+
+    for( int i = 0; i < hilos; i++){
+        if( pthread_join( thread[i], NULL ) < 0 ){
+            cout << "error pthread_join" << endl;
+            return -1;
+        }
+    }
+
+
     //stop time
 	int stop = clock();
 
-    namedWindow("blur effect image", WINDOW_NORMAL );
-    imshow("blur effect image", picture);
+    //namedWindow("blur effect image", WINDOW_NORMAL );
+    //imshow("blur effect image", picture);
 
-    waitKey(0);
+    //waitKey(0);
 
     //print performance information
 	cout << cols << "x";
 	cout << rows << "\t";
+    cout << "," << "\t";     
 	cout << kernel << "\t";
-	cout << (stop - start)/double(CLOCKS_PER_SEC)*1000 << " ms" << endl;
+    cout << "," << "\t";     
+    cout << hilos << "\t";
+    cout << "," << "\t";     
     return 0;
 }
