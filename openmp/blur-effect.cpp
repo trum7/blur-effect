@@ -2,6 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <pthread.h>
 #include <mutex>
+#include "omp.h"
 
 
 using namespace std;
@@ -78,12 +79,11 @@ int* effect( int row, int column){
 
 }
 
-void *blur( void * z ){
+void *blur( int id ){
 
-    mtx.lock();
+    
     int id_hilo = id;
-    id++;
-    mtx.unlock();
+    
 
     for( int i = id; i <= rows * cols; i = i+hilos ){
         //Calculate average color
@@ -110,22 +110,12 @@ int main( int argc, char** argv )
     cols = picture.cols;
 
 
-    void * null = NULL;
-
-    pthread_t thread[hilos];
-    for( int i = 0; i < hilos; i++){
-        if( pthread_create( &thread[i], NULL, blur, NULL) != 0 ){
-            cout << "error pthread_create" << endl;
-            return -1;
-        }
+    #pragma omp parallel num_threads(hilos)
+    {
+        int ID = omp_get_thread_num();
+        blur( ID );
     }
 
-    for( int i = 0; i < hilos; i++){
-        if( pthread_join( thread[i], NULL ) < 0 ){
-            cout << "error pthread_join" << endl;
-            return -1;
-        }
-    }
 
 
     //stop time
