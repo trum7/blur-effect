@@ -32,7 +32,7 @@ int validations( int argc, char** argv  ){
         cout << "The kernel must be a number between 3 - 15" << endl;
         return -1;
     }
-    
+
     radio = int((kernel - 1)/2);
     return 0;
 }
@@ -73,7 +73,7 @@ int* effect( int row, int column){
 int blur(){
 
 
-    for( int i = 0; i <= rows * cols; i++ ){
+    for( int i = 0; i <rows * cols; i++ ){
         //Calculate average color
         int* RGB = effect( (int)i / cols, i % cols );
         //Assign the new average value
@@ -89,7 +89,7 @@ int blur(){
 
 int main( int argc, char** argv )
 {
-    
+
     validations( argc, argv);
 
     //start time
