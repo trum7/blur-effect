@@ -1,4 +1,5 @@
 g++ blur-effect.cpp -o blur-effect -fopenmp -std=c++0x `pkg-config --cflags opencv --libs`
+# g++ $(pkg-config --cflags --libs opencv) -fopenmp blur-effect.cpp -o blur-effect -w
 wait
 
 
