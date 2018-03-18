@@ -1,6 +1,6 @@
 g++ blur-effect.cpp -o blur-effect -lpthread -std=c++0x `pkg-config --cflags opencv --libs`
+# g++ $(pkg-config --cflags --libs opencv) -pthread blur-effect.cpp -o blur-effect -w
 wait
-
 
 #720
 
