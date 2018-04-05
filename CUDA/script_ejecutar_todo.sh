@@ -278,7 +278,7 @@ echo ${time} >> time.txt
 wait
 
 # kernel 15 && 15 blocks
-time=$( TIMEFORMAT="%R"; { time ./blur image/ducati720.jpg 15 15 5; } 2>&1 );
+time=$( TIMEFORMAT="%R"; { time ./blur image/ducati720.jpg 15 5 5; } 2>&1 );
 echo ${time} >> time.txt
 wait
 time=$( TIMEFORMAT="%R"; { time ./blur image/ducati720.jpg 15 180 5; } 2>&1 );
@@ -587,7 +587,7 @@ echo ${time} >> time.txt
 wait
 
 # kernel 15 && 15 blocks
-time=$( TIMEFORMAT="%R"; { time ./blur image/ducati1080.jpg 15 15 5; } 2>&1 );
+time=$( TIMEFORMAT="%R"; { time ./blur image/ducati1080.jpg 15 5 5; } 2>&1 );
 echo ${time} >> time.txt
 wait
 time=$( TIMEFORMAT="%R"; { time ./blur image/ducati1080.jpg 15 180 5; } 2>&1 );
@@ -897,7 +897,7 @@ echo ${time} >> time.txt
 wait
 
 # kernel 15 && 15 blocks
-time=$( TIMEFORMAT="%R"; { time ./blur image/ducati4k.jpg 15 15 5; } 2>&1 );
+time=$( TIMEFORMAT="%R"; { time ./blur image/ducati4k.jpg 15 5 5; } 2>&1 );
 echo ${time} >> time.txt
 wait
 time=$( TIMEFORMAT="%R"; { time ./blur image/ducati4k.jpg 15 180 5; } 2>&1 );
@@ -929,4 +929,3 @@ wait
 time=$( TIMEFORMAT="%R"; { time ./blur image/ducati4k.jpg 15 1020 10; } 2>&1 );
 echo ${time} >> time.txt
 wait
-
